@@ -1,16 +1,16 @@
-```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NTTC Patna Presentation</title>
+<title>बदलती नारी, नया समाज</title>
 
+<!-- Premium Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&family=Noto+Serif+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -28,59 +28,169 @@ html,body{
 }
 
 body{
-    font-family:'Montserrat',sans-serif;
-    color:white;
+    color:#fff;
+    background:#000;
 }
 
-/* ================= BACKGROUND ================= */
+/* ================= MAIN ================= */
 
 .scene{
     position:relative;
     width:100%;
     height:100vh;
-    background:
-        radial-gradient(circle at 50% 50%,
-        rgba(120,85,20,.13),
-        rgba(0,0,0,.96) 55%,
-        #000 100%);
     overflow:hidden;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(132,92,25,.14) 0%,
+            rgba(20,15,8,.45) 30%,
+            #000 72%
+        );
 }
 
-/* moving light */
 
-.light{
+/* ================= GLOW ================= */
+
+.glow{
     position:absolute;
-    width:70vw;
-    height:8px;
 
-    background:linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,215,120,.7),
-        transparent
-    );
+    width:45vw;
+    height:45vw;
 
-    filter:blur(8px);
+    max-width:600px;
+    max-height:600px;
 
-    transform:rotate(-25deg);
-    left:-80%;
-    top:45%;
+    left:50%;
+    top:50%;
 
-    animation:lightMove 8s infinite;
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(218,170,66,.09),
+            transparent 68%
+        );
+
+    filter:blur(15px);
+
+    animation:pulse 5s ease-in-out infinite;
 }
 
-@keyframes lightMove{
+@keyframes pulse{
 
-    0%{
-        left:-80%;
-        opacity:0;
-    }
-
-    15%{
-        opacity:1;
+    0%,100%{
+        transform:translate(-50%,-50%) scale(.9);
+        opacity:.5;
     }
 
     50%{
+        transform:translate(-50%,-50%) scale(1.08);
+        opacity:1;
+    }
+}
+
+
+/* ================= GOLDEN RING ================= */
+
+.ring{
+    position:absolute;
+
+    width:min(58vw,680px);
+    height:min(58vw,680px);
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    border:1px solid rgba(218,174,82,.25);
+
+    box-shadow:
+        0 0 50px rgba(218,174,82,.05);
+
+    animation:rotate 22s linear infinite;
+}
+
+.ring::before{
+    content:"";
+
+    position:absolute;
+
+    inset:25px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,220,130,.10);
+}
+
+.ring::after{
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    border-radius:50%;
+
+    border:1px dashed rgba(218,174,82,.10);
+}
+
+@keyframes rotate{
+
+    from{
+        transform:translate(-50%,-50%) rotate(0deg);
+    }
+
+    to{
+        transform:translate(-50%,-50%) rotate(360deg);
+    }
+}
+
+
+/* ================= MOVING LIGHT ================= */
+
+.light{
+    position:absolute;
+
+    width:80vw;
+    height:2px;
+
+    left:-90%;
+    top:50%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,225,150,.7),
+            transparent
+        );
+
+    filter:blur(5px);
+
+    transform:rotate(-18deg);
+
+    animation:light 8s ease-in-out infinite;
+}
+
+@keyframes light{
+
+    0%{
+        left:-90%;
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    55%{
         left:110%;
         opacity:1;
     }
@@ -96,131 +206,116 @@ body{
 
 .particles{
     position:absolute;
+
     width:100%;
     height:100%;
-    overflow:hidden;
 }
 
 .particle{
     position:absolute;
-    width:3px;
-    height:3px;
 
-    background:#e7c77a;
+    width:2px;
+    height:2px;
 
     border-radius:50%;
 
-    box-shadow:
-        0 0 8px #e7c77a,
-        0 0 15px rgba(231,199,122,.6);
+    background:#e6c66f;
 
-    animation:float linear infinite;
+    box-shadow:
+        0 0 7px rgba(230,198,111,.9),
+        0 0 14px rgba(230,198,111,.4);
+
+    animation:particleMove linear infinite;
 }
 
-@keyframes float{
+@keyframes particleMove{
 
-    0%{
+    from{
         transform:translateY(110vh) scale(.2);
         opacity:0;
     }
 
     15%{
-        opacity:1;
-    }
-
-    80%{
         opacity:.8;
     }
 
-    100%{
+    80%{
+        opacity:.7;
+    }
+
+    to{
         transform:translateY(-10vh) scale(1);
         opacity:0;
     }
 }
 
 
-/* ================= CENTER RING ================= */
+/* ================= CORNERS ================= */
 
-.ring{
+.corner{
     position:absolute;
 
-    width:min(55vw,650px);
-    height:min(55vw,650px);
+    width:65px;
+    height:65px;
 
-    border:1px solid rgba(214,170,75,.25);
+    border-color:rgba(218,174,82,.35);
 
-    border-radius:50%;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    box-shadow:
-        0 0 80px rgba(200,150,50,.05);
-
-    animation:ringRotate 20s linear infinite;
+    border-style:solid;
 }
 
-.ring::before,
-.ring::after{
-
-    content:"";
-
-    position:absolute;
-
-    inset:20px;
-
-    border:1px solid rgba(255,215,120,.10);
-
-    border-radius:50%;
+.tl{
+    top:28px;
+    left:28px;
+    border-width:1px 0 0 1px;
 }
 
-.ring::after{
-    inset:-25px;
-    border-style:dashed;
-    border-color:rgba(255,215,120,.08);
+.tr{
+    top:28px;
+    right:28px;
+    border-width:1px 1px 0 0;
 }
 
-@keyframes ringRotate{
+.bl{
+    bottom:28px;
+    left:28px;
+    border-width:0 0 1px 1px;
+}
 
-    from{
-        transform:translate(-50%,-50%) rotate(0deg);
-    }
-
-    to{
-        transform:translate(-50%,-50%) rotate(360deg);
-    }
+.br{
+    bottom:28px;
+    right:28px;
+    border-width:0 1px 1px 0;
 }
 
 
-/* ================= TEXT ================= */
+/* ================= CONTENT ================= */
 
 .content{
-
     position:absolute;
 
-    width:100%;
-    height:100%;
+    inset:0;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     text-align:center;
 
-    padding:30px;
+    padding:25px;
 }
 
 .card{
-
     position:absolute;
 
-    width:90%;
+    width:92%;
+    max-width:1100px;
 
     opacity:0;
 
-    transform:translateY(35px) scale(.92);
+    transform:
+        translateY(40px)
+        scale(.90);
 
     filter:blur(10px);
 
@@ -231,132 +326,156 @@ body{
 }
 
 .card.active{
-
     opacity:1;
 
-    transform:translateY(0) scale(1);
+    transform:
+        translateY(0)
+        scale(1);
 
     filter:blur(0);
 }
 
 .card.exit{
-
     opacity:0;
 
-    transform:translateY(-35px) scale(1.06);
+    transform:
+        translateY(-35px)
+        scale(1.06);
 
     filter:blur(8px);
 }
 
 
-/* small number */
+/* ================= NUMBER ================= */
 
 .number{
-
     font-family:'Montserrat',sans-serif;
 
     font-size:12px;
 
     letter-spacing:7px;
 
-    color:#c9a64b;
+    color:#c9a95c;
 
     margin-bottom:22px;
-
-    opacity:.9;
 }
 
 
-/* main heading */
+/* ================= LABEL ================= */
 
-.title{
+.label{
+    font-family:'Montserrat',sans-serif;
 
-    font-family:'Cinzel',serif;
-
-    font-weight:600;
-
-    font-size:clamp(25px,5vw,70px);
-
-    letter-spacing:4px;
-
-    line-height:1.35;
-
-    text-shadow:
-        0 0 15px rgba(255,220,140,.18),
-        0 0 40px rgba(255,200,80,.08);
-}
-
-
-/* subtitle */
-
-.subtitle{
-
-    margin-top:25px;
-
-    font-size:clamp(12px,1.5vw,18px);
+    font-size:clamp(11px,1.4vw,17px);
 
     letter-spacing:6px;
 
-    color:#cdbb91;
+    color:#cbb98b;
 
-    font-weight:400;
+    margin-bottom:12px;
 }
 
 
-/* golden line */
+/* ================= MAIN ENGLISH TITLE ================= */
 
-.line{
+.title{
+    font-family:'Cinzel',serif;
 
-    width:0;
+    font-size:clamp(25px,5vw,66px);
 
-    height:1px;
+    line-height:1.35;
 
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #d8b45a,
-        transparent
-    );
+    letter-spacing:4px;
 
-    margin:28px auto 0;
+    font-weight:600;
 
-    transition:width 1.5s ease .5s;
-}
-
-.card.active .line{
-    width:min(400px,70%);
+    text-shadow:
+        0 0 18px rgba(255,215,120,.20),
+        0 0 50px rgba(255,190,70,.08);
 }
 
 
-/* names */
+/* ================= HINDI TOPIC ================= */
+
+.topic{
+
+    font-family:'Noto Serif Devanagari',serif;
+
+    font-size:clamp(35px,7vw,92px);
+
+    line-height:1.45;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #e5c46c,
+            #fff,
+            #d6ae52,
+            #fff
+        );
+
+    background-size:300% auto;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    animation:goldText 5s linear infinite;
+
+    text-shadow:
+        0 0 30px rgba(220,175,70,.12);
+}
+
+@keyframes goldText{
+
+    0%{
+        background-position:0% center;
+    }
+
+    100%{
+        background-position:300% center;
+    }
+}
+
+
+/* ================= NAME ================= */
 
 .name{
 
     font-family:'Cinzel',serif;
 
-    font-size:clamp(28px,5vw,65px);
+    font-size:clamp(27px,5vw,68px);
+
+    font-weight:600;
 
     letter-spacing:5px;
 
-    margin-top:8px;
+    margin-top:12px;
 
-    background:linear-gradient(
-        90deg,
-        #fff,
-        #d7b45d,
-        #fff
-    );
+    background:
+        linear-gradient(
+            90deg,
+            #fff,
+            #d9b55e,
+            #fff
+        );
+
+    background-size:200% auto;
 
     -webkit-background-clip:text;
 
     -webkit-text-fill-color:transparent;
 
-    background-size:200% auto;
-
-    animation:goldMove 4s linear infinite;
+    animation:nameGold 4s linear infinite;
 }
 
-@keyframes goldMove{
+@keyframes nameGold{
 
     to{
         background-position:200% center;
@@ -364,69 +483,45 @@ body{
 }
 
 
-/* PRESENTED BY */
+/* ================= LINE ================= */
 
-.final .number{
-    letter-spacing:9px;
+.line{
+
+    width:0;
+
+    height:1px;
+
+    margin:28px auto 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d9b55e,
+            transparent
+        );
+
+    transition:width 1.5s ease .5s;
 }
 
-.final .title{
+.card.active .line{
+    width:min(420px,70%);
+}
 
-    font-size:clamp(18px,2.5vw,30px);
 
+/* ================= FINAL ================= */
+
+.final .label{
     letter-spacing:8px;
-
-    color:#d5c49d;
 }
 
 .final .name{
 
-    font-size:clamp(38px,7vw,90px);
+    font-size:clamp(40px,8vw,100px);
 
     font-weight:700;
 
     letter-spacing:8px;
-
-    margin-top:20px;
-}
-
-
-/* ================= CORNER DESIGN ================= */
-
-.corner{
-
-    position:absolute;
-
-    width:70px;
-    height:70px;
-
-    border-color:rgba(214,170,75,.35);
-
-    border-style:solid;
-}
-
-.tl{
-    top:30px;
-    left:30px;
-    border-width:1px 0 0 1px;
-}
-
-.tr{
-    top:30px;
-    right:30px;
-    border-width:1px 1px 0 0;
-}
-
-.bl{
-    bottom:30px;
-    left:30px;
-    border-width:0 0 1px 1px;
-}
-
-.br{
-    bottom:30px;
-    right:30px;
-    border-width:0 1px 1px 0;
 }
 
 
@@ -435,8 +530,33 @@ body{
 @media(max-width:600px){
 
     .ring{
-        width:100vw;
-        height:100vw;
+        width:105vw;
+        height:105vw;
+    }
+
+    .corner{
+        width:45px;
+        height:45px;
+    }
+
+    .tl{
+        top:18px;
+        left:18px;
+    }
+
+    .tr{
+        top:18px;
+        right:18px;
+    }
+
+    .bl{
+        bottom:18px;
+        left:18px;
+    }
+
+    .br{
+        bottom:18px;
+        right:18px;
     }
 
     .title{
@@ -447,10 +567,9 @@ body{
         letter-spacing:3px;
     }
 
-    .subtitle{
-        letter-spacing:3px;
+    .topic{
+        letter-spacing:0;
     }
-
 }
 
 </style>
@@ -461,17 +580,16 @@ body{
 
 <div class="scene">
 
-    <!-- rotating ring -->
+    <div class="glow"></div>
+
     <div class="ring"></div>
 
-    <!-- moving light -->
     <div class="light"></div>
 
-    <!-- particles -->
     <div class="particles" id="particles"></div>
 
 
-    <!-- corners -->
+    <!-- Corners -->
 
     <div class="corner tl"></div>
     <div class="corner tr"></div>
@@ -479,12 +597,10 @@ body{
     <div class="corner br"></div>
 
 
-    <!-- TEXT -->
-
     <div class="content">
 
 
-        <!-- 01 -->
+        <!-- 01 COLLEGE -->
 
         <div class="card active">
 
@@ -500,13 +616,13 @@ body{
         </div>
 
 
-        <!-- 02 -->
+        <!-- 02 SESSION -->
 
         <div class="card">
 
             <div class="number">02</div>
 
-            <div class="title">
+            <div class="label">
                 B.Ed. SESSION
             </div>
 
@@ -519,13 +635,33 @@ body{
         </div>
 
 
-        <!-- 03 -->
+        <!-- 03 TOPIC -->
 
         <div class="card">
 
             <div class="number">03</div>
 
-            <div class="subtitle">
+            <div class="label">
+                TOPIC
+            </div>
+
+            <div class="topic">
+                “बदलती नारी,<br>
+                नया समाज”
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <!-- 04 FOUNDER -->
+
+        <div class="card">
+
+            <div class="number">04</div>
+
+            <div class="label">
                 FOUNDER
             </div>
 
@@ -538,13 +674,13 @@ body{
         </div>
 
 
-        <!-- 04 -->
+        <!-- 05 DIRECTOR -->
 
         <div class="card">
 
-            <div class="number">04</div>
+            <div class="number">05</div>
 
-            <div class="subtitle">
+            <div class="label">
                 DIRECTOR
             </div>
 
@@ -557,13 +693,13 @@ body{
         </div>
 
 
-        <!-- 05 -->
+        <!-- 06 PRINCIPAL -->
 
         <div class="card">
 
-            <div class="number">05</div>
+            <div class="number">06</div>
 
-            <div class="subtitle">
+            <div class="label">
                 PRINCIPAL
             </div>
 
@@ -576,13 +712,13 @@ body{
         </div>
 
 
-        <!-- 06 -->
+        <!-- 07 PRESENTED BY -->
 
         <div class="card final">
 
-            <div class="number">06</div>
+            <div class="number">07</div>
 
-            <div class="title">
+            <div class="label">
                 PRESENTED BY
             </div>
 
@@ -594,6 +730,7 @@ body{
 
         </div>
 
+
     </div>
 
 </div>
@@ -601,58 +738,75 @@ body{
 
 <script>
 
-/* ================= PARTICLES ================= */
+/* ================= GOLD PARTICLES ================= */
 
 const particleBox =
 document.getElementById("particles");
 
-for(let i=0;i<90;i++){
+for(let i=0; i<110; i++){
 
-    const p=document.createElement("div");
+    const particle =
+        document.createElement("div");
 
-    p.className="particle";
+    particle.className="particle";
 
-    p.style.left=Math.random()*100+"%";
+    particle.style.left =
+        Math.random()*100 + "%";
 
-    p.style.animationDuration=
-        (5+Math.random()*9)+"s";
+    particle.style.animationDuration =
+        (5 + Math.random()*10) + "s";
 
-    p.style.animationDelay=
-        (-Math.random()*12)+"s";
+    particle.style.animationDelay =
+        (-Math.random()*12) + "s";
 
-    p.style.opacity=
-        Math.random();
+    particle.style.opacity =
+        Math.random()*.8;
 
-    p.style.transform=
-        `scale(${Math.random()*1.5})`;
+    const size =
+        1 + Math.random()*3;
 
-    particleBox.appendChild(p);
+    particle.style.width =
+        size + "px";
+
+    particle.style.height =
+        size + "px";
+
+    particleBox.appendChild(particle);
 }
 
 
-/* ================= SLIDES ================= */
+/* ================= SLIDE SYSTEM ================= */
 
-const cards=
+const cards =
 document.querySelectorAll(".card");
 
-let index=0;
+let current = 0;
 
-const duration=4500;
+const slideTime = 5000;
+
 
 function nextSlide(){
 
-    const oldCard=cards[index];
+    const oldCard =
+        cards[current];
 
     oldCard.classList.remove("active");
+
     oldCard.classList.add("exit");
 
-    index++;
 
-    if(index>=cards.length){
-        index=0;
+    current++;
+
+    if(current >= cards.length){
+
+        current = 0;
+
     }
 
-    const newCard=cards[index];
+
+    const newCard =
+        cards[current];
+
 
     setTimeout(()=>{
 
@@ -663,23 +817,26 @@ function nextSlide(){
         newCard.classList.add("active");
 
     },350);
+
 }
 
-setInterval(nextSlide,duration);
+
+/* Automatic */
+
+setInterval(
+    nextSlide,
+    slideTime
+);
 
 
-/* ================= CLICK TO NEXT ================= */
+/* Click anywhere = next */
 
-document.body.addEventListener("click",()=>{
-
-    nextSlide();
-
-});
+document.body.addEventListener(
+    "click",
+    nextSlide
+);
 
 </script>
 
 </body>
 </html>
-```
-
-
