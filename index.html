@@ -5,187 +5,681 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>College Presentation</title>
+<title>NTTC Patna Presentation</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#000;
 }
 
-.container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 30px;
+body{
+    font-family:'Montserrat',sans-serif;
+    color:white;
 }
 
-.text {
-    position: absolute;
-    width: 90%;
-    color: #fff;
-    font-family: "Cinzel", serif;
-    opacity: 0;
-    transform: scale(0.85) translateY(20px);
-    letter-spacing: 3px;
+/* ================= BACKGROUND ================= */
+
+.scene{
+    position:relative;
+    width:100%;
+    height:100vh;
+    background:
+        radial-gradient(circle at 50% 50%,
+        rgba(120,85,20,.13),
+        rgba(0,0,0,.96) 55%,
+        #000 100%);
+    overflow:hidden;
 }
 
-/* College Name */
-.college {
-    font-size: clamp(24px, 4vw, 58px);
-    font-weight: 700;
-}
+/* moving light */
 
-/* Session */
-.session {
-    font-size: clamp(25px, 4vw, 55px);
-    font-weight: 600;
-}
+.light{
+    position:absolute;
+    width:70vw;
+    height:8px;
 
-/* Founder etc. */
-.role {
-    font-size: clamp(23px, 3.5vw, 48px);
-    font-weight: 600;
-}
-
-/* Presented By */
-.presented {
-    font-family: "Playfair Display", serif;
-    font-size: clamp(28px, 5vw, 65px);
-    font-weight: 700;
-    letter-spacing: 4px;
-}
-
-/* Animation */
-.show {
-    animation: cinematic 4s ease forwards;
-}
-
-@keyframes cinematic {
-
-    0% {
-        opacity: 0;
-        transform: scale(0.85) translateY(25px);
-        filter: blur(8px);
-    }
-
-    20% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-        filter: blur(0);
-    }
-
-    75% {
-        opacity: 1;
-        transform: scale(1.03);
-        filter: blur(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(1.08) translateY(-20px);
-        filter: blur(6px);
-    }
-}
-
-/* Subtle background effect */
-.container::before {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(
-        circle,
-        rgba(255,255,255,0.06),
-        transparent 70%
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,215,120,.7),
+        transparent
     );
-    filter: blur(20px);
+
+    filter:blur(8px);
+
+    transform:rotate(-25deg);
+    left:-80%;
+    top:45%;
+
+    animation:lightMove 8s infinite;
 }
+
+@keyframes lightMove{
+
+    0%{
+        left:-80%;
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+        left:110%;
+        opacity:1;
+    }
+
+    70%,100%{
+        left:110%;
+        opacity:0;
+    }
+}
+
+
+/* ================= PARTICLES ================= */
+
+.particles{
+    position:absolute;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.particle{
+    position:absolute;
+    width:3px;
+    height:3px;
+
+    background:#e7c77a;
+
+    border-radius:50%;
+
+    box-shadow:
+        0 0 8px #e7c77a,
+        0 0 15px rgba(231,199,122,.6);
+
+    animation:float linear infinite;
+}
+
+@keyframes float{
+
+    0%{
+        transform:translateY(110vh) scale(.2);
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    80%{
+        opacity:.8;
+    }
+
+    100%{
+        transform:translateY(-10vh) scale(1);
+        opacity:0;
+    }
+}
+
+
+/* ================= CENTER RING ================= */
+
+.ring{
+    position:absolute;
+
+    width:min(55vw,650px);
+    height:min(55vw,650px);
+
+    border:1px solid rgba(214,170,75,.25);
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    box-shadow:
+        0 0 80px rgba(200,150,50,.05);
+
+    animation:ringRotate 20s linear infinite;
+}
+
+.ring::before,
+.ring::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:20px;
+
+    border:1px solid rgba(255,215,120,.10);
+
+    border-radius:50%;
+}
+
+.ring::after{
+    inset:-25px;
+    border-style:dashed;
+    border-color:rgba(255,215,120,.08);
+}
+
+@keyframes ringRotate{
+
+    from{
+        transform:translate(-50%,-50%) rotate(0deg);
+    }
+
+    to{
+        transform:translate(-50%,-50%) rotate(360deg);
+    }
+}
+
+
+/* ================= TEXT ================= */
+
+.content{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:30px;
+}
+
+.card{
+
+    position:absolute;
+
+    width:90%;
+
+    opacity:0;
+
+    transform:translateY(35px) scale(.92);
+
+    filter:blur(10px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.4s cubic-bezier(.16,1,.3,1),
+        filter 1.2s ease;
+}
+
+.card.active{
+
+    opacity:1;
+
+    transform:translateY(0) scale(1);
+
+    filter:blur(0);
+}
+
+.card.exit{
+
+    opacity:0;
+
+    transform:translateY(-35px) scale(1.06);
+
+    filter:blur(8px);
+}
+
+
+/* small number */
+
+.number{
+
+    font-family:'Montserrat',sans-serif;
+
+    font-size:12px;
+
+    letter-spacing:7px;
+
+    color:#c9a64b;
+
+    margin-bottom:22px;
+
+    opacity:.9;
+}
+
+
+/* main heading */
+
+.title{
+
+    font-family:'Cinzel',serif;
+
+    font-weight:600;
+
+    font-size:clamp(25px,5vw,70px);
+
+    letter-spacing:4px;
+
+    line-height:1.35;
+
+    text-shadow:
+        0 0 15px rgba(255,220,140,.18),
+        0 0 40px rgba(255,200,80,.08);
+}
+
+
+/* subtitle */
+
+.subtitle{
+
+    margin-top:25px;
+
+    font-size:clamp(12px,1.5vw,18px);
+
+    letter-spacing:6px;
+
+    color:#cdbb91;
+
+    font-weight:400;
+}
+
+
+/* golden line */
+
+.line{
+
+    width:0;
+
+    height:1px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #d8b45a,
+        transparent
+    );
+
+    margin:28px auto 0;
+
+    transition:width 1.5s ease .5s;
+}
+
+.card.active .line{
+    width:min(400px,70%);
+}
+
+
+/* names */
+
+.name{
+
+    font-family:'Cinzel',serif;
+
+    font-size:clamp(28px,5vw,65px);
+
+    letter-spacing:5px;
+
+    margin-top:8px;
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #d7b45d,
+        #fff
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+    background-size:200% auto;
+
+    animation:goldMove 4s linear infinite;
+}
+
+@keyframes goldMove{
+
+    to{
+        background-position:200% center;
+    }
+}
+
+
+/* PRESENTED BY */
+
+.final .number{
+    letter-spacing:9px;
+}
+
+.final .title{
+
+    font-size:clamp(18px,2.5vw,30px);
+
+    letter-spacing:8px;
+
+    color:#d5c49d;
+}
+
+.final .name{
+
+    font-size:clamp(38px,7vw,90px);
+
+    font-weight:700;
+
+    letter-spacing:8px;
+
+    margin-top:20px;
+}
+
+
+/* ================= CORNER DESIGN ================= */
+
+.corner{
+
+    position:absolute;
+
+    width:70px;
+    height:70px;
+
+    border-color:rgba(214,170,75,.35);
+
+    border-style:solid;
+}
+
+.tl{
+    top:30px;
+    left:30px;
+    border-width:1px 0 0 1px;
+}
+
+.tr{
+    top:30px;
+    right:30px;
+    border-width:1px 1px 0 0;
+}
+
+.bl{
+    bottom:30px;
+    left:30px;
+    border-width:0 0 1px 1px;
+}
+
+.br{
+    bottom:30px;
+    right:30px;
+    border-width:0 1px 1px 0;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:600px){
+
+    .ring{
+        width:100vw;
+        height:100vw;
+    }
+
+    .title{
+        letter-spacing:2px;
+    }
+
+    .name{
+        letter-spacing:3px;
+    }
+
+    .subtitle{
+        letter-spacing:3px;
+    }
+
+}
+
 </style>
 </head>
 
+
 <body>
 
-<div class="container">
+<div class="scene">
 
-    <div class="text college">
-        NATIONAL TEACHER'S<br>
-        TRAINING COLLEGE, PATNA
-    </div>
+    <!-- rotating ring -->
+    <div class="ring"></div>
 
-    <div class="text session">
-        B.Ed. SESSION<br>
-        2026 – 2027
-    </div>
+    <!-- moving light -->
+    <div class="light"></div>
 
-    <div class="text role">
-        FOUNDER<br>
-        — JAHANGIR KHAN —
-    </div>
+    <!-- particles -->
+    <div class="particles" id="particles"></div>
 
-    <div class="text role">
-        DIRECTOR<br>
-        — ADNAN NAWAZ KHAN —
-    </div>
 
-    <div class="text role">
-        PRINCIPAL<br>
-        — DR. A.K. ROY —
-    </div>
+    <!-- corners -->
 
-    <div class="text presented">
-        PRESENTED BY<br>
-        ANKITA RAJ
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+
+    <!-- TEXT -->
+
+    <div class="content">
+
+
+        <!-- 01 -->
+
+        <div class="card active">
+
+            <div class="number">01</div>
+
+            <div class="title">
+                NATIONAL TEACHER'S<br>
+                TRAINING COLLEGE, PATNA
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <!-- 02 -->
+
+        <div class="card">
+
+            <div class="number">02</div>
+
+            <div class="title">
+                B.Ed. SESSION
+            </div>
+
+            <div class="name">
+                2026 — 2027
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <!-- 03 -->
+
+        <div class="card">
+
+            <div class="number">03</div>
+
+            <div class="subtitle">
+                FOUNDER
+            </div>
+
+            <div class="name">
+                JAHANGIR KHAN
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <!-- 04 -->
+
+        <div class="card">
+
+            <div class="number">04</div>
+
+            <div class="subtitle">
+                DIRECTOR
+            </div>
+
+            <div class="name">
+                ADNAN NAWAZ KHAN
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <!-- 05 -->
+
+        <div class="card">
+
+            <div class="number">05</div>
+
+            <div class="subtitle">
+                PRINCIPAL
+            </div>
+
+            <div class="name">
+                DR. A.K. ROY
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <!-- 06 -->
+
+        <div class="card final">
+
+            <div class="number">06</div>
+
+            <div class="title">
+                PRESENTED BY
+            </div>
+
+            <div class="name">
+                ANKITA RAJ
+            </div>
+
+            <div class="line"></div>
+
+        </div>
+
     </div>
 
 </div>
 
+
 <script>
 
-const texts = document.querySelectorAll(".text");
+/* ================= PARTICLES ================= */
 
-let current = 0;
+const particleBox =
+document.getElementById("particles");
 
-function showNext() {
+for(let i=0;i<90;i++){
 
-    texts.forEach(t => {
-        t.classList.remove("show");
-    });
+    const p=document.createElement("div");
 
-    texts[current].classList.add("show");
+    p.className="particle";
 
-    current++;
+    p.style.left=Math.random()*100+"%";
 
-    if (current >= texts.length) {
-        current = 0;
-    }
+    p.style.animationDuration=
+        (5+Math.random()*9)+"s";
+
+    p.style.animationDelay=
+        (-Math.random()*12)+"s";
+
+    p.style.opacity=
+        Math.random();
+
+    p.style.transform=
+        `scale(${Math.random()*1.5})`;
+
+    particleBox.appendChild(p);
 }
 
-/* First text */
-showNext();
 
-/* Change every 4 seconds */
-setInterval(showNext, 4000);
+/* ================= SLIDES ================= */
+
+const cards=
+document.querySelectorAll(".card");
+
+let index=0;
+
+const duration=4500;
+
+function nextSlide(){
+
+    const oldCard=cards[index];
+
+    oldCard.classList.remove("active");
+    oldCard.classList.add("exit");
+
+    index++;
+
+    if(index>=cards.length){
+        index=0;
+    }
+
+    const newCard=cards[index];
+
+    setTimeout(()=>{
+
+        cards.forEach(card=>{
+            card.classList.remove("exit");
+        });
+
+        newCard.classList.add("active");
+
+    },350);
+}
+
+setInterval(nextSlide,duration);
+
+
+/* ================= CLICK TO NEXT ================= */
+
+document.body.addEventListener("click",()=>{
+
+    nextSlide();
+
+});
 
 </script>
 
 </body>
 </html>
 ```
+
+
