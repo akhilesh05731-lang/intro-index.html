@@ -1,0 +1,191 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>College Presentation</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+}
+
+.text {
+    position: absolute;
+    width: 90%;
+    color: #fff;
+    font-family: "Cinzel", serif;
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+    letter-spacing: 3px;
+}
+
+/* College Name */
+.college {
+    font-size: clamp(24px, 4vw, 58px);
+    font-weight: 700;
+}
+
+/* Session */
+.session {
+    font-size: clamp(25px, 4vw, 55px);
+    font-weight: 600;
+}
+
+/* Founder etc. */
+.role {
+    font-size: clamp(23px, 3.5vw, 48px);
+    font-weight: 600;
+}
+
+/* Presented By */
+.presented {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(28px, 5vw, 65px);
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+/* Animation */
+.show {
+    animation: cinematic 4s ease forwards;
+}
+
+@keyframes cinematic {
+
+    0% {
+        opacity: 0;
+        transform: scale(0.85) translateY(25px);
+        filter: blur(8px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+
+    75% {
+        opacity: 1;
+        transform: scale(1.03);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.08) translateY(-20px);
+        filter: blur(6px);
+    }
+}
+
+/* Subtle background effect */
+.container::before {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.06),
+        transparent 70%
+    );
+    filter: blur(20px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="text college">
+        NATIONAL TEACHER'S<br>
+        TRAINING COLLEGE, PATNA
+    </div>
+
+    <div class="text session">
+        B.Ed. SESSION<br>
+        2026 – 2027
+    </div>
+
+    <div class="text role">
+        FOUNDER<br>
+        — JAHANGIR KHAN —
+    </div>
+
+    <div class="text role">
+        DIRECTOR<br>
+        — ADNAN NAWAZ KHAN —
+    </div>
+
+    <div class="text role">
+        PRINCIPAL<br>
+        — DR. A.K. ROY —
+    </div>
+
+    <div class="text presented">
+        PRESENTED BY<br>
+        ANKITA RAJ
+    </div>
+
+</div>
+
+<script>
+
+const texts = document.querySelectorAll(".text");
+
+let current = 0;
+
+function showNext() {
+
+    texts.forEach(t => {
+        t.classList.remove("show");
+    });
+
+    texts[current].classList.add("show");
+
+    current++;
+
+    if (current >= texts.length) {
+        current = 0;
+    }
+}
+
+/* First text */
+showNext();
+
+/* Change every 4 seconds */
+setInterval(showNext, 4000);
+
+</script>
+
+</body>
+</html>
+```
